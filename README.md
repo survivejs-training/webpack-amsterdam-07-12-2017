@@ -62,3 +62,15 @@ const config = {
   },
 };
 ```
+
+### Loader Order
+
+```javascript
+use: ["style-loader", "css-loader"]
+```
+
+read as
+
+```
+styleLoader(cssLoader(cssFile))
+```
