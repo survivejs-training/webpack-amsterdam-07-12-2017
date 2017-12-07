@@ -31,4 +31,34 @@
 
 ## Examples
 
-TODO
+### Loader
+
+```javascript
+module.exports = input => input + input;
+```
+
+### `resolve`
+
+```javascript
+import 'foo'; // foo.jsx
+
+/* ... */
+```
+
+```javascript
+const config = {
+  resolve: {
+    alias: {
+      foo: path.join(__dirname, 'foo'),
+    },
+    extensions: [
+      '.jsx', '.js',
+    ],
+    modules: [
+      /*...*/
+      'own_modules',
+      'node_modules'
+    ],
+  },
+};
+```
