@@ -37,6 +37,12 @@ const productionConfig = merge([
       name: "[name].[ext]",
     },
   }),
+  parts.extractBundles([
+    {
+      name: "vendor",
+      minChunks: ({ resource }) => /node_modules/.test(resource),
+    },
+  ]),
 ]);
 
 const developmentConfig = merge([

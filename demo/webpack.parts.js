@@ -1,4 +1,11 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require("webpack");
+
+exports.extractBundles = bundles => ({
+  plugins: bundles.map(
+    bundle => new webpack.optimize.CommonsChunkPlugin(bundle)
+  ),
+});
 
 exports.extractCSS = ({ include, exclude, use }) => {
   // Output extracted CSS to a file
