@@ -1,3 +1,7 @@
 body {
   background: cornsilk;
+
+  background-image: url("./nyan.gif");
+  background-repeat: no-repeat;
+  background-position: center;
 }
