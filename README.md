@@ -22,7 +22,12 @@
 
 ## Goals
 
-*
+* vue-cli, stuck with plugins -> Understand how the plugins work
+* How to extend plugins and how to write your own
+* How to write webpack configuration
+* Understand fundamentals of webpack
+* create-react-app - understand how the configuration works
+* How to use webpack in CI environment
 
 ## Examples
 
