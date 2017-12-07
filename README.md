@@ -74,3 +74,7 @@ read as
 ```
 styleLoader(cssLoader(cssFile))
 ```
+
+1. `enforce: "pre"` - Linters
+2. Regular loaders
+3. `enforce: "post"` - Code coverage
