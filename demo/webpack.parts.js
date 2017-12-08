@@ -24,13 +24,13 @@ exports.extractBundles = bundles => ({
   ),
 });
 
-exports.extractCSS = ({ include, exclude, use }) => {
+exports.extractCSS = ({ include, exclude, use, filename }) => {
   // Output extracted CSS to a file
   const plugin = new ExtractTextPlugin({
     // `allChunks` is needed with CommonsChunkPlugin to extract
     // from extracted chunks as well.
     allChunks: true,
-    filename: "[name].[contenthash:8].css",
+    filename,
   });
 
   return {

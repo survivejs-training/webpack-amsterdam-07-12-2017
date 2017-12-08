@@ -10,6 +10,12 @@ const PATHS = {
   build: path.join(__dirname, "build"),
 };
 
+const NAMES = {
+  css: "[name].[contenthash:8].css",
+  image: "[name].[hash:8].[ext]",
+  output: "[name].[chunkhash:8].js",
+};
+
 const commonConfig = merge([
   {
     entry: {
@@ -17,7 +23,7 @@ const commonConfig = merge([
     },
     output: {
       path: PATHS.build,
-      filename: "[name].[chunkhash:8].js",
+      filename: NAMES.output,
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -32,11 +38,12 @@ const commonConfig = merge([
 const productionConfig = merge([
   parts.extractCSS({
     use: "css-loader",
+    filename: NAMES.css,
   }),
   parts.loadImages({
     options: {
       limit: 15000,
-      name: "[name].[hash:8].[ext]",
+      name: NAMES.image,
     },
   }),
   parts.extractBundles([
