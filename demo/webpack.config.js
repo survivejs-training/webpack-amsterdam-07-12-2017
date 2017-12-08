@@ -51,6 +51,10 @@ const productionConfig = merge([
       name: "vendor",
       minChunks: ({ resource }) => /node_modules/.test(resource),
     },
+    {
+      name: "manifest",
+      minChunks: Infinity,
+    },
   ]),
   parts.minifyJavaScript(),
   parts.minifyCSS({
