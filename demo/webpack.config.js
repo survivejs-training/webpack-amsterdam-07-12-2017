@@ -45,6 +45,13 @@ const productionConfig = merge([
       minChunks: ({ resource }) => /node_modules/.test(resource),
     },
   ]),
+  {
+    performance: {
+      hints: "warning", // "error" or false are valid too
+      maxEntrypointSize: 50000, // in bytes
+      maxAssetSize: 50000, // in bytes
+    },
+  },
 ]);
 
 const developmentConfig = merge([
