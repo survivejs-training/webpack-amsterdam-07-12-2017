@@ -1,5 +1,10 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack");
+const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
+
+exports.minifyJavaScript = () => ({
+  plugins: [new UglifyWebpackPlugin()],
+});
 
 exports.extractBundles = bundles => ({
   plugins: bundles.map(

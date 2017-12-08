@@ -45,11 +45,12 @@ const productionConfig = merge([
       minChunks: ({ resource }) => /node_modules/.test(resource),
     },
   ]),
+  parts.minifyJavaScript(),
   {
     performance: {
       hints: "warning", // "error" or false are valid too
       maxEntrypointSize: 50000, // in bytes
-      maxAssetSize: 50000, // in bytes
+      maxAssetSize: 100000, // in bytes
     },
   },
 ]);
