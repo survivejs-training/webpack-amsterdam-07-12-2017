@@ -46,6 +46,16 @@ const productionConfig = merge([
     },
   ]),
   parts.minifyJavaScript(),
+  parts.minifyCSS({
+    options: {
+      discardComments: {
+        removeAll: true,
+      },
+      // Run cssnano in safe mode to avoid
+      // potentially unsafe transformations.
+      safe: true,
+    },
+  }),
   {
     performance: {
       hints: "warning", // "error" or false are valid too

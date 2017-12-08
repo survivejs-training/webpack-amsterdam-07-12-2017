@@ -1,6 +1,18 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack");
 const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const cssnano = require("cssnano");
+
+exports.minifyCSS = ({ options }) => ({
+  plugins: [
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: options,
+      canPrint: false,
+    }),
+  ],
+});
 
 exports.minifyJavaScript = () => ({
   plugins: [new UglifyWebpackPlugin()],
