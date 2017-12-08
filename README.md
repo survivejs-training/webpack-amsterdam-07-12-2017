@@ -16,9 +16,8 @@
 
 * 09:00-12:00 - Get started with the second set
 * 12:00-13:00 - Lunch
-* 13:00-14:00 - Free form
-* 14:00-16:00 - Tobias
-* 16:00-17:00 - Free form
+* 13:00-15:00 - Finish the second set + free form
+* 15:00-17:00 - Tobias
 
 ## Goals
 
