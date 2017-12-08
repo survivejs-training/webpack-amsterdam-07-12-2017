@@ -76,9 +76,18 @@ const developmentConfig = merge([
 ]);
 
 module.exports = env => {
-  if (env === "production") {
-    return merge(commonConfig, productionConfig);
+  const config = {
+    production: productionConfig,
+    development: developmentConfig,
+  }[env];
+
+  if (!config) {
+    throw new Error("Config not found!");
   }
 
-  return merge(commonConfig, developmentConfig);
+  return merge(
+    commonConfig,
+    config,
+    parts.setFreeVariable("process.env.NODE_ENV", env)
+  );
 };
