@@ -1,5 +1,4 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const merge = require("webpack-merge");
 const webpack = require("webpack");
 
@@ -18,19 +17,11 @@ const NAMES = {
 
 const commonConfig = merge([
   {
-    entry: {
-      app: PATHS.app,
-    },
     output: {
       path: PATHS.build,
       filename: NAMES.output,
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        title: "Webpack demo",
-      }),
-      new webpack.NamedModulesPlugin(),
-    ],
+    plugins: [new webpack.NamedModulesPlugin()],
   },
   parts.loadJavaScript({ include: PATHS.app }),
 ]);
@@ -56,7 +47,7 @@ const productionConfig = merge([
       minChunks: Infinity,
     },
   ]),
-  parts.minifyJavaScript(),
+  //parts.minifyJavaScript(),
   parts.minifyCSS({
     options: {
       discardComments: {
@@ -74,6 +65,7 @@ const productionConfig = merge([
       maxAssetSize: 100000, // in bytes
     },
   },
+  parts.setFreeVariable("process.env.NODE_ENV", "production"),
 ]);
 
 const developmentConfig = merge([
@@ -87,18 +79,24 @@ const developmentConfig = merge([
 ]);
 
 module.exports = env => {
-  const config = {
-    production: productionConfig,
-    development: developmentConfig,
-  }[env];
+  const pages = [
+    parts.page({
+      title: "Webpack demo",
+      entry: {
+        app: PATHS.app,
+      },
+      chunks: ["app", "manifest", "vendor"],
+    }),
+    parts.page({
+      title: "Another demo",
+      path: "another",
+      entry: {
+        another: path.join(PATHS.app, "another.js"),
+      },
+      chunks: ["another", "manifest", "vendor"],
+    }),
+  ];
+  const config = env === "production" ? productionConfig : developmentConfig;
 
-  if (!config) {
-    throw new Error("Config not found!");
-  }
-
-  return merge(
-    commonConfig,
-    config,
-    parts.setFreeVariable("process.env.NODE_ENV", env)
-  );
+  return merge([commonConfig, config].concat(pages));
 };

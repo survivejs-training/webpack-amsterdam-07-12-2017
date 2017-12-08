@@ -3,6 +3,27 @@ const webpack = require("webpack");
 const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const cssnano = require("cssnano");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+exports.page = (
+  {
+    path = "",
+    template = require.resolve("html-webpack-plugin/default_index.ejs"),
+    title,
+    entry,
+    chunks,
+  } = {}
+) => ({
+  entry,
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: `${path && path + "/"}index.html`,
+      template,
+      title,
+      chunks,
+    }),
+  ],
+});
 
 exports.minifyCSS = ({ options }) => ({
   plugins: [
